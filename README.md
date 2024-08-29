@@ -1,12 +1,17 @@
-### Migration
-```bash
-dotnet ef migrations add "initial01" --project .\Persistence --startup-project .\API --output-dir .\Migrations
-dotnet ef database update --project .\Persistence --startup-project ./API
-```
-
 ### The dotnet-ef tool must be install to use the database command
 ```bash
 dotnet tool install --global dotnet-ef
+```
+
+### Migration
+```bash
+dotnet ef migrations add "initial ApplicationDbContext" --project Persistence --startup-project API --output-dir Migrations --context ApplicationDbContext
+
+dotnet ef migrations add "initial AuthDbContext" --project Persistence --startup-project API --output-dir Migrations --context AuthDbContext
+
+dotnet ef database update --project Persistence --startup-project API --context ApplicationDbContext
+
+dotnet ef database update --project Persistence --startup-project API --context AuthDbContext
 ```
 
 ### Add reference from the project 'Application' to the project 'API'
@@ -31,5 +36,5 @@ dotnet add package Newtonsoft.Json
 
 ### database connection string
 ```bash
-"bootcampDatabase": "Server=localhost\MSSQLSERVER01;Database=bootcamp;User ID=test02;password=123456;TrustServerCertificate=True;Trusted_Connection=True"
+"bootcampDatabase": "Server=localhost,1433;Database=bootcamp;User Id=sa;Password=StrongPassword123;TrustServerCertificate=True;e"
 ```
