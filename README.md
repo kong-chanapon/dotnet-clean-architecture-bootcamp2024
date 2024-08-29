@@ -36,5 +36,5 @@ dotnet add package Newtonsoft.Json
 
 ### database connection string
 ```bash
-"bootcampDatabase": "Server=localhost,1433;Database=bootcamp;User Id=sa;Password=StrongPassword123;TrustServerCertificate=True;e"
+"bootcampDatabase": "Server=localhost,1433;Database=bootcamp;User Id=sa;Password=StrongPassword123;TrustServerCertificate=True;"
 ```
