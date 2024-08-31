@@ -18,14 +18,12 @@ namespace API.Controllers {
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetAll() {
             var categories = await _mediator.Send(new GetAllCategoriesQuery());
             return Ok(categories);
         }
 
         [HttpGet("{id:Guid}")]
-        [Authorize]
         public async Task<IActionResult> GetById([FromRoute] Guid id) {
             var categories = await _mediator.Send(new GetCategoryByIdQuery(id));
             if (categories == null) {
@@ -35,14 +33,12 @@ namespace API.Controllers {
         }
 
         [HttpGet("{urlHandle}")]
-        [Authorize]
         public async Task<IActionResult> GetBy([FromRoute] string urlHandle) {
             var categories = await _mediator.Send(new GetCategoryByUrlHandleQuery(urlHandle));
             return Ok(categories);
         }
 
         [HttpGet("count")]
-        [Authorize]
         public async Task<IActionResult> GetCount() {
             var result = await _mediator.Send(new GetCategoryCountQuery());
             return Ok(result);
@@ -50,7 +46,6 @@ namespace API.Controllers {
 
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Add([FromBody]AddCategoryRequestDto reqeust)
         {
             var reuslt = await _mediator.Send(new AddCategoryCommand(reqeust));
@@ -58,7 +53,6 @@ namespace API.Controllers {
         }
         
         [HttpPut("{id:Guid}")]
-        [Authorize]
         public async Task<IActionResult> Update([FromRoute] Guid id, UpdateCategoryRequestDto request)
         {
             var result = await _mediator.Send(new UpdateCategoryCommand(id, request));
@@ -66,7 +60,6 @@ namespace API.Controllers {
         }
 
         [HttpDelete("{id:Guid}")]
-        [Authorize]
         public async Task<IActionResult> Delete([FromRoute] Guid id){
             var result = await _mediator.Send(new DeleteCategoryCommand(id));
             return Ok(result);

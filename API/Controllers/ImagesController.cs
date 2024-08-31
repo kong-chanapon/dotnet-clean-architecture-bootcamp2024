@@ -18,7 +18,6 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [Authorize]
         public async Task<IActionResult> GetAll() {
             var reuslt = await _mediator.Send(new GetAllBlogImageQuery());
             return Ok(reuslt);
@@ -26,7 +25,6 @@ namespace API.Controllers
 
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> UploadImage([FromForm] IFormFile file,
             [FromForm] string fileName, [FromForm] string title) {
             await _mediator.Send(new AddBlogImageCommand{ File = file, FileName = fileName, Title = title });

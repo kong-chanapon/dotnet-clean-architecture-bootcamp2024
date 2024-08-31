@@ -57,7 +57,7 @@ public class BlogPostRepository : IBlogPostRepository
 
     public async Task<BlogPost> UpdateBlogPostAsync(BlogPost updateBlogPost)
     {
-            var target = await _dbContext.BlogPosts.FindAsync(updateBlogPost.Id);
+            var target = await _dbContext.BlogPosts.Include(i => i.Categories).FirstOrDefaultAsync();
 
             if(target == null){
                 return null;
@@ -71,6 +71,8 @@ public class BlogPostRepository : IBlogPostRepository
             target.Author = updateBlogPost.Author;
             target.IsVisible = updateBlogPost.IsVisible;
             target.Categories = updateBlogPost.Categories;
+
+            
             await _dbContext.SaveChangesAsync();
             return target;
     }

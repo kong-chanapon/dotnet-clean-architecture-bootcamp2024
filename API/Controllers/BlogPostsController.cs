@@ -29,21 +29,18 @@ namespace API.Controllers
         }
 
         [HttpGet("{id:Guid}")]
-        [Authorize]
         public async Task<IActionResult> GetById([FromRoute] Guid id) {
             var result = await _mediator.Send(new GetBlogPostByIdQuery(id));
             return Ok(result);
         }
 
         [HttpGet("{urlHandle}")]
-        [Authorize]
         public async Task<IActionResult> GetByUrlHandle([FromRoute] string urlHandle) {
             var result = await _mediator.Send(new GetBlogPostByUrlHandleQuery(urlHandle));
             return Ok(result);
         }
 
         [HttpGet("count")]
-        [Authorize]
         public async Task<IActionResult> GetCount() {
             var result = await _mediator.Send(new GetBlogPostCountQuery());
             return Ok(result);
@@ -51,7 +48,6 @@ namespace API.Controllers
 
 
         [HttpPost]
-        [Authorize]
         public async Task<IActionResult> Add([FromBody] AddBlogPostRequestDto request)
         {
             var blogPost = await _mediator.Send(new AddBlogPostCommand(request));
@@ -59,7 +55,6 @@ namespace API.Controllers
         }
         
         [HttpPut("{id:Guid}")]
-        [Authorize]
         public async Task<IActionResult> Update([FromRoute]Guid id, [FromBody]UpdateBlogPostRequestDto request)
         {
             var result = await _mediator.Send(new UpdateBlogPostCommand(id, request));
@@ -67,7 +62,6 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id:Guid}")]
-        [Authorize]
         public async Task<IActionResult> Delete([FromRoute] Guid id){
             var result = await _mediator.Send(new DeleteBlogPostCommand(id));
             return Ok(result);
